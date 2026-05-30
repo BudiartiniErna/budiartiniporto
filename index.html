@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Portfolio - Ni Luh Erna Budiartini | Guru Informatika PPG Prajabatan</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ===== PARTIKEL BINTANG ===== */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes float-star {
+            0% {
+                transform: translateY(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+
+        .star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star-falling {
+            position: fixed;
+            width: 1px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float-star 8s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== BACKGROUND GALAKSI ===== */
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #1a0b3d 25%, #16213e 50%, #0f3460 75%, #1d0b3d 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #e0e7ff;
+            overflow-x: hidden;
+        }
+
+        /* ===== GRADIENT TEXT ===== */
+        .gradient-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #ec4899 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-alt {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== GLOW EFFECTS ===== */
+        .glow-pink {
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5), 0 0 40px rgba(236, 72, 153, 0.3);
+        }
+
+        .glow-purple {
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.5), 0 0 40px rgba(167, 139, 250, 0.3);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        }
+
+        /* ===== BLOB SHAPE ===== */
+        .blob-frame {
+            border-radius: 67% 33% 82% 18% / 45% 65% 35% 55%;
+            animation: blob-morph 8s ease-in-out infinite;
+        }
+
+        @keyframes blob-morph {
+            0%, 100% { border-radius: 67% 33% 82% 18% / 45% 65% 35% 55%; }
+            25% { border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            75% { border-radius: 70% 30% 46% 54% / 30% 27% 73% 70%; }
+        }
+
+        /* ===== NAVBAR STICKY ===== */
+        nav {
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            color: #e0e7ff;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #ec4899, #a78bfa);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* ===== CARD INTERAKTIF ===== */
+        .card-interactive {
+            background: rgba(26, 11, 61, 0.6);
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card-interactive:hover {
+            background: rgba(26, 11, 61, 0.9);
+            border-color: rgba(236, 72, 153, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.2);
+        }
+
+        /* ===== PROGRESS BAR ANIMASI ===== */
+        .progress-bar {
+            background: linear-gradient(90deg, #ec4899, #a78bfa);
+            transition: width 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+            border-radius: 10px;
+        }
+
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* ===== TAB INTERAKTIF ===== */
+        .tab-btn {
+            position: relative;
+            background: transparent;
+            color: #a0aec0;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn.active {
+            color: #ec4899;
+        }
+
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, #ec4899, #a78bfa);
+            transition: width 0.3s ease;
+        }
+
+        .tab-btn.active::after {
+            width: 100%;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ===== BUTTON GRADIENT ===== */
+        .btn-gradient {
+            background: linear-gradient(135deg, #ec4899, #a78bfa);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.4);
+        }
+
+        /* ===== SECTION SPACING ===== */
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== BLOCKQUOTE ===== */
+        .blockquote-custom {
+            border-left: 4px solid;
+            border-image: linear-gradient(135deg, #ec4899, #a78bfa) 1;
+            background: rgba(167, 139, 250, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        /* ===== GRID RESPONSIVE ===== */
+        .grid-auto {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* ===== TABLE STYLING ===== */
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+        }
+
+        th {
+            background: rgba(167, 139, 250, 0.1);
+            color: #ec4899;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(167, 139, 250, 0.05);
+        }
+
+        /* ===== ICON BOX ===== */
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ec4899, #a78bfa);
+            border-radius: 12px;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* ===== SMOOTH SCROLL ===== */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 15px;
+                min-height: auto;
+            }
+
+            .grid-auto {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+
+            .navbar-logo {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        /* ===== LOGO UNIVERSITAS ===== */
+        .logo-uni {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: #a78bfa;
+            font-size: 1.1rem;
+        }
+
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ec4899, #a78bfa);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== PARTIKEL BINTANG (Background) ===== -->
+    <div id="star-container"></div>
+
+    <!-- ===== NAVBAR STICKY ===== -->
+    <nav class="fixed top-0 w-full z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Universitas -->
+                <div class="logo-uni">
+                    <div class="logo-circle">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="hidden sm:block text-xs sm:text-sm">
+                        <div>UNIVERSITAS</div>
+                        <div>PENDIDIKAN GANESHA</div>
+                    </div>
+                </div>
+
+                <!-- Menu Navigasi -->
+                <div class="flex gap-6 sm:gap-8">
+                    <a href="#home" class="nav-link active" data-nav="home">
+                        <i class="fas fa-home"></i> <span class="hidden sm:inline">Home</span>
+                    </a>
+                    <a href="#profile" class="nav-link" data-nav="profile">
+                        <i class="fas fa-user"></i> <span class="hidden sm:inline">Profil</span>
+                    </a>
+                    <a href="#artefak" class="nav-link" data-nav="artefak">
+                        <i class="fas fa-briefcase"></i> <span class="hidden sm:inline">Artefak</span>
+                    </a>
+                    <a href="#penilaian" class="nav-link" data-nav="penilaian">
+                        <i class="fas fa-chart-bar"></i> <span class="hidden sm:inline">Nilai</span>
+                    </a>
+                    <a href="#guru" class="nav-link" data-nav="guru">
+                        <i class="fas fa-star"></i> <span class="hidden sm:inline">Guru</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== SECTION 1: HOME / HERO ===== -->
+    <section id="home" class="pt-32">
+        <div class="max-w-6xl mx-auto w-full">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Text Hero -->
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+                        Mari Bersama Membangun
+                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+                            Pendidikan Digital
+                        </span>
+                    </h1>
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                        Sebagai calon Guru Informatika profesional, saya berkomitmen menciptakan pembelajaran yang inovatif, interaktif, dan bermakna untuk generasi digital masa depan.
+                    </p>
+                    <div class="flex gap-4 justify-center md:justify-start flex-wrap">
+                        <button class="btn-gradient px-8 py-3 rounded-lg text-white font-semibold hover:scale-105">
+                            <i class="fas fa-download mr-2"></i> Unduh CV
+                        </button>
+                        <button class="px-8 py-3 rounded-lg border-2 border-purple-500 text-purple-300 font-semibold hover:bg-purple-500/10">
+                            <i class="fas fa-envelope mr-2"></i> Hubungi Saya
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Foto Profil dengan Blob Shape -->
+                <div class="flex justify-center md:justify-end">
+                    <div class="relative">
+                        <!-- Glow Layer -->
+                        <div class="absolute inset-0 blur-3xl bg-gradient-to-br from-pink-500/30 to-purple-600/30 rounded-full"></div>
+                        
+                        <!-- Frame Blob -->
+                        <div class="blob-frame w-80 h-80 md:w-96 md:h-96 bg-gradient-to-br from-pink-400/20 to-purple-600/20 border-2 border-purple-500/50 relative glow-pink overflow-hidden">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect fill='%23a78bfa' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Poppins' font-size='24' fill='%23fff' font-weight='bold'%3EFoto Profil%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Poppins' font-size='16' fill='%23f3f4f6'%3ENi Luh Erna%3C/text%3E%3C/svg%3E" alt="Profil Mahasiswa" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 2: PROFIL MAHASISWA ===== -->
+    <section id="profile" class="pt-32">
+        <div class="max-w-6xl mx-auto w-full">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text">
+                <i class="fas fa-user-circle mr-3"></i> Profil Saya
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <!-- Foto Profile Besar -->
+                <div class="flex justify-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 blur-3xl bg-gradient-to-br from-pink-500/40 to-purple-600/40 rounded-full"></div>
+                        <div class="blob-frame w-72 h-96 bg-gradient-to-br from-purple-500/30 to-pink-500/20 border-2 border-pink-400/50 glow-pink overflow-hidden relative">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect fill='%236b21a8' width='300' height='400'/%3E%3Ccircle cx='150' cy='100' r='40' fill='%23ec4899'/%3E%3Crect x='80' y='160' width='140' height='140' fill='%23ec4899'/%3E%3C/svg%3E" alt="Profil Lengkap" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Konten Profil -->
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-6 rounded-lg border border-purple-500/20">
+                        <h3 class="text-2xl font-bold text-white mb-2">
+                            Ni Luh Erna Budiartini
+                        </h3>
+                        <p class="text-purple-300 mb-4">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Buleleng, Bali, Indonesia
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            Dari desa yang kaya akan budaya Balinese, saya tumbuh dengan nilai-nilai filosofi lokal yang mendalam. Buleleng, dengan keindahan alam Pulau Bali dan tradisi leluhur yang masih kuat, mengajarkan saya tentang kesederhanaan, kebijaksanaan, dan tanggung jawab sosial.
+                        </p>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-pink-500/10 to-purple-500/10 p-6 rounded-lg border border-pink-500/20">
+                        <h4 class="text-xl font-bold text-white mb-3">
+                            <i class="fas fa-lightbulb mr-2 text-yellow-400"></i> Inspirasi & Misi
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-3">
+                            Teknologi informasi adalah jembatan menuju masa depan yang lebih cerah. Sebagai Guru Informatika, saya bersemangat untuk memberdayakan generasi muda dengan keterampilan digital yang relevan, berpikir kritis, dan kreativitas tanpa batas.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            Saya percaya bahwa setiap siswa memiliki potensi unik. Dengan pendekatan pembelajaran yang adaptif, inklusif, dan berbasis kompetensi, saya berkomitmen menciptakan ekosistem belajar yang mendukung pertumbuhan holistik peserta didik di era transformasi digital.
+                        </p>
+                    </div>
+
+                    <!-- Quote Inspiratif -->
+                    <div class="blockquote-custom">
+                        <p class="text-lg italic text-pink-300 mb-2">
+                            <i class="fas fa-quote-left text-purple-400 mr-2"></i>
+                            "Pendidikan adalah kunci emas yang membuka semua pintu. Sebagai pendidik, kita bukan hanya mengajar fakta, tetapi membangun karakter, menginspirasi mimpi, dan memberdayakan generasi untuk mengubah dunia."
+                        </p>
+                        <p class="text-right text-sm text-purple-300">
+                            — Paulo Freire
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 3: ANALISIS ARTEFAK & PRODUK PEMBELAJARAN ===== -->
+    <section id="artefak" class="pt-32">
+        <div class="max-w-6xl mx-auto w-full">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 gradient-text">
+                <i class="fas fa-cube mr-3"></i> Artefak & Produk Pembelajaran
+            </h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+                Analisis mendalam komponen perangkat pembelajaran yang telah dikembangkan selama praktik mengajar terbimbing.
+            </p>
+
+            <!-- Tab Navigation -->
+            <div class="flex flex-wrap gap-2 mb-8 border-b border-purple-500/20 pb-4 justify-center md:justify-start">
+                <button class="tab-btn active" data-tab="rpp">
+                    <i class="fas fa-file-lines mr-2"></i> RPP
+                </button>
+                <button class="tab-btn" data-tab="media">
+                    <i class="fas fa-images mr-2"></i> Media
+                </button>
+                <button class="tab-btn" data-tab="hasil-kerja">
+                    <i class="fas fa-clipboard mr-2"></i> Hasil Kerja Siswa
+                </button>
+                <button class="tab-btn" data-tab="video">
+                    <i class="fas fa-video mr-2"></i> Video Pembelajaran
+                </button>
+                <button class="tab-btn" data-tab="evaluasi">
+                    <i class="fas fa-chart-line mr-2"></i> Evaluasi
+                </button>
+            </div>
+
+            <!-- Tab Content: RPP -->
+            <div class="tab-content active" id="tab-rpp">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-pink-300 mb-4">
+                            <i class="fas fa-target mr-2"></i> Konteks & Tujuan
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Rencana Pelaksanaan Pembelajaran (RPP) dirancang untuk pembelajaran dasar Informatika di jenjang SMA kelas X dengan fokus pada Algoritma dan Pemrograman Dasar.
+                        </p>
+                        <p class="text-gray-400 text-sm">
+                            <strong>Target Kompetensi:</strong> Siswa mampu memahami konsep algoritma, flowchart, dan implementasinya dalam pseudocode serta bahasa pemrograman Python.
+                        </p>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-purple-300 mb-4">
+                            <i class="fas fa-exclamation-triangle mr-2"></i> Kendala & Hambatan
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Beberapa tantangan yang dihadapi dalam penyusunan RPP:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li><i class="fas fa-check text-pink-400 mr-2"></i> Keragaman latar belakang siswa dalam pemrograman</li>
+                            <li><i class="fas fa-check text-pink-400 mr-2"></i> Keterbatasan waktu untuk praktik intensif</li>
+                            <li><i class="fas fa-check text-pink-400 mr-2"></i> Ketersediaan infrastruktur lab komputer</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-blue-300 mb-4">
+                            <i class="fas fa-book mr-2"></i> Teori Pedagogi
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            RPP ini mengintegrasikan beberapa pendekatan teoritis:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li><strong>Constructivism:</strong> Siswa membangun pemahaman melalui eksplorasi aktif</li>
+                            <li><strong>Scaffolding:</strong> Dukungan bertahap dari konsep sederhana ke kompleks</li>
+                            <li><strong>Kolaboratif:</strong> Pembelajaran peer-to-peer dan kerja kelompok</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-yellow-300 mb-4">
+                            <i class="fas fa-trophy mr-2"></i> Faktor Keberhasilan
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Keberhasilan pembelajaran dapat diukur melalui:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li><strong>Keterlibatan:</strong> Partisipasi aktif 80%+ siswa</li>
+                            <li><strong>Pencapaian:</strong> 75%+ siswa mencapai KKM</li>
+                            <li><strong>Keterampilan:</strong> Kemampuan mendesain algoritma sederhana</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-green-300 mb-4">
+                            <i class="fas fa-plus-circle mr-2"></i> Kelebihan
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Poin-poin kuat dari RPP yang dikembangkan:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>✓ Alokasi waktu yang realistis</li>
+                            <li>✓ Integrasi tools modern (IDE, visualizer)</li>
+                            <li>✓ Metode penilaian yang komprehensif</li>
+                            <li>✓ Pendekatan yang student-centered</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-red-300 mb-4">
+                            <i class="fas fa-minus-circle mr-2"></i> Kekurangan & Adaptasi
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Area yang perlu diperbaiki untuk konteks berbeda:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>→ Tambah materi differensial untuk siswa advanced</li>
+                            <li>→ Lebih banyak contoh kontekstual lokal</li>
+                            <li>→ Fleksibilitas untuk pembelajaran hybrid/online</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Media -->
+            <div class="tab-content" id="tab-media">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-pink-300 mb-4">
+                            <i class="fas fa-images mr-2"></i> Jenis Media Pembelajaran
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Media yang dikembangkan mencakup:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>📊 Presentasi PowerPoint interaktif dengan animasi</li>
+                            <li>🎬 Video pembelajaran (tutorial algoritma, demo coding)</li>
+                            <li>🖥️ Platform interaktif (Replit, CodePen)</li>
+                            <li>📱 Infografis dan diagram visual konsep</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-purple-300 mb-4">
+                            <i class="fas fa-cogs mr-2"></i> Desain & Implementasi
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Prinsip desain yang diterapkan:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>User-friendly interface untuk semua level</li>
+                            <li>Konsistensi visual dan branding edukatif</li>
+                            <li>Aksesibilitas (subtitle, high contrast)</li>
+                            <li>Responsif untuk berbagai perangkat</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-blue-300 mb-4">
+                            <i class="fas fa-star mr-2"></i> Keunggulan Media
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Efektivitas media yang dikembangkan:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Meningkatkan engagement siswa hingga 85%</li>
+                            <li>Mendukung berbagai gaya belajar</li>
+                            <li>Dapat diakses ulang kapan saja</li>
+                            <li>Mempercepat pemahaman konsep abstrak</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-yellow-300 mb-4">
+                            <i class="fas fa-tools mr-2"></i> Adaptasi & Update
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Rencana pengembangan lebih lanjut:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Integrasi AR/VR untuk visualisasi kompleks</li>
+                            <li>Gamification untuk meningkatkan motivasi</li>
+                            <li>Lokalisasi konten dengan contoh lokal Bali</li>
+                            <li>Dashboard monitoring progres siswa real-time</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Hasil Kerja Siswa -->
+            <div class="tab-content" id="tab-hasil-kerja">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-pink-300 mb-4">
+                            <i class="fas fa-tasks mr-2"></i> Produk Siswa
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Hasil kerja siswa menunjukkan pemahaman mendalam:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Program Python sederhana (kalkulator, permainan)</li>
+                            <li>Flowchart manual dan digital</li>
+                            <li>Presentasi proyek kelompok</li>
+                            <li>Portfolio GitHub dengan dokumentasi</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-purple-300 mb-4">
+                            <i class="fas fa-chart-line mr-2"></i> Analisis Hasil
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Evaluasi komprehensif hasil pembelajaran:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>78% siswa mencapai kompetensi dasar</li>
+                            <li>45% siswa menunjukkan kreativitas tinggi</li>
+                            <li>Perbaikan signifikan dari pre-test ke post-test</li>
+                            <li>Feedback positif dari siswa tentang pengalaman belajar</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-blue-300 mb-4">
+                            <i class="fas fa-lightbulb mr-2"></i> Pembelajaran dari Hasil
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Insight penting untuk pengembangan pembelajaran:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Perlunya lebih banyak scaffolding di awal</li>
+                            <li>Siswa responsif terhadap challenge berbasis masalah nyata</li>
+                            <li>Peer learning sangat efektif di kelas ini</li>
+                            <li>Motivasi meningkat dengan recognition dan reward</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-yellow-300 mb-4">
+                            <i class="fas fa-arrow-up mr-2"></i> Perbaikan Strategi
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Strategi untuk peningkatan hasil di siklus berikutnya:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Personalisasi pembelajaran sesuai kecepatan siswa</li>
+                            <li>Lebih banyak project-based learning</li>
+                            <li>Kolaborasi intensif dengan guru subject matter</li>
+                            <li>Mentoring one-on-one untuk siswa dengan kesulitan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Video Pembelajaran -->
+            <div class="tab-content" id="tab-video">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-pink-300 mb-4">
+                            <i class="fas fa-video mr-2"></i> Konten Video
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Video pembelajaran yang diproduksi meliputi:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Tutorial algoritma dasar (10-15 menit per video)</li>
+                            <li>Live coding session dengan narasi jelas</li>
+                            <li>Diskusi konsep dengan visual animation</li>
+                            <li>Tips & tricks praktis pemrograman</li>
+                            <li>Q&A session dan troubleshooting</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-purple-300 mb-4">
+                            <i class="fas fa-quality-control mr-2"></i> Kualitas Produksi
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Standar kualitas yang diterapkan:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>HD 1080p resolution, clear audio</li>
+                            <li>Subtitle dalam Bahasa Indonesia</li>
+                            <li>Color grading untuk visual appeal</li>
+                            <li>Background musik edukatif non-distracting</li>
+                            <li>CTA (Call-to-Action) yang jelas di akhir</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-blue-300 mb-4">
+                            <i class="fas fa-users-students mr-2"></i> Feedback Siswa
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Respons positif dari peserta didik:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>"Video membuat konsep susah jadi mudah"</li>
+                            <li>"Bisa ditonton berkali-kali sesuai kecepatan saya"</li>
+                            <li>"Narasi jelas dan mudah dipahami"</li>
+                            <li>Rating: 4.5/5 dari 32 siswa</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-yellow-300 mb-4">
+                            <i class="fas fa-flask mr-2"></i> Inovasi Masa Depan
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Pengembangan lebih lanjut untuk video pembelajaran:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Interactive video dengan quiz embedded</li>
+                            <li>360° atau VR untuk virtual lab tour</li>
+                            <li>Multi-language subtitles untuk inklusivitas</li>
+                            <li>Platform pembelajaran dengan progress tracking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Evaluasi -->
+            <div class="tab-content" id="tab-evaluasi">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-pink-300 mb-4">
+                            <i class="fas fa-microscope mr-2"></i> Metode Evaluasi
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Pendekatan evaluasi pembelajaran yang holistik:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Formative assessment (kuis, diskusi harian)</li>
+                            <li>Summative assessment (tes akhir, proyek)</li>
+                            <li>Penilaian proses (partisipasi, kolaborasi)</li>
+                            <li>Self-assessment dan peer-assessment</li>
+                            <li>Refleksi pembelajaran siswa</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-purple-300 mb-4">
+                            <i class="fas fa-checkCircle mr-2"></i> Hasil Evaluasi
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Data pencapaian pembelajaran siswa:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Rata-rata nilai: 78 (Baik)</li>
+                            <li>Siswa mencapai KKM (75): 78%</li>
+                            <li>Siswa dengan nilai Excellent (85+): 35%</li>
+                            <li>Peningkatan rata-rata dari pre-test: +20 poin</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-blue-300 mb-4">
+                            <i class="fas fa-brain mr-2"></i> Analisis Kognitif
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Pencapaian di berbagai level Bloom's:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Remember & Understand: 95% ✓</li>
+                            <li>Apply: 85% ✓</li>
+                            <li>Analyze: 72% (Perlu ditingkatkan)</li>
+                            <li>Evaluate & Create: 60% (Target untuk siklus berikutnya)</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-interactive p-8 rounded-xl">
+                        <h4 class="text-xl font-bold text-yellow-300 mb-4">
+                            <i class="fas fa-ladder mr-2"></i> Rencana Perbaikan
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Strategi peningkatan untuk siklus berikutnya:
+                        </p>
+                        <ul class="text-gray-400 text-sm space-y-2">
+                            <li>Fokus pada higher-order thinking skills</li>
+                            <li>Lebih banyak problem-solving tasks</li>
+                            <li>Diskusi Socratic untuk deep learning</li>
+                            <li>Remedial untuk siswa dengan kesulitan</li>
+                            <li>Extension activities untuk high achievers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 4: INSTRUMEN PENILAIAN ===== -->
+    <section id="penilaian" class="pt-32">
+        <div class="max-w-6xl mx-auto w-full">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 gradient-text">
+                <i class="fas fa-chart-bar mr-3"></i> Instrumen Penilaian
+            </h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+                Hasil penilaian dari Guru Pamong selama 3 Siklus Praktik Mengajar Terbimbing
+            </p>
+
+            <!-- Tab Navigation untuk Instrumen -->
+            <div class="flex flex-wrap gap-2 mb-8 border-b border-purple-500/20 pb-4 justify-center md:justify-start">
+                <button class="tab-btn active" data-tab="lampiran-7">
+                    <i class="fas fa-edit mr-2"></i> Lampiran 7 (Perangkat)
+                </button>
+                <button class="tab-btn" data-tab="lampiran-8">
+                    <i class="fas fa-chalkboard mr-2"></i> Lampiran 8 (Praktik Mengajar)
+                </button>
+            </div>
+
+            <!-- Lampiran 7: Penilaian Perangkat Pembelajaran -->
+            <div class="tab-content active" id="tab-lampiran-7">
+                <div class="bg-gradient-to-br from-purple-900/20 to-pink-900/20 p-8 rounded-xl border border-purple-500/20 overflow-x-auto">
+                    <h3 class="text-2xl font-bold text-pink-300 mb-6">
+                        <i class="fas fa-list-check mr-2"></i> Lampiran 7: Penilaian Perangkat Pembelajaran
+                    </h3>
+                    
+                    <table class="w-full text-sm md:text-base">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Komponen Perangkat</th>
+                                <th class="text-center">Siklus 1</th>
+                                <th class="text-center">Siklus 2</th>
+                                <th class="text-center">Siklus 3</th>
+                                <th class="text-center">Rata-rata</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold text-purple-300">1. Rencana Pelaksanaan Pembelajaran (RPP)</td>
+                                <td class="text-center">
+                                    <div class="flex justify-center">
+                                        <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">80</span>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">85</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">90</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-400">85</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold text-purple-300">2. Media Pembelajaran</td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">78</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">82</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">88</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-400">82.67</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold text-purple-300">3. Instrumen Penilaian</td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">75</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">80</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">87</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-400">80.67</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold text-purple-300">4. LKPD & Materi Ajar</td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">82</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">85</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">89</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-400">85.33</td>
+                            </tr>
+                            <tr style="background: rgba(236, 72, 153, 0.1);">
+                                <td class="font-bold text-pink-300">RATA-RATA LAMPIRAN 7</td>
+                                <td class="text-center font-bold">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm">78.75</span>
+                                </td>
+                                <td class="text-center font-bold">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm">83</span>
+                                </td>
+                                <td class="text-center font-bold">
+                                    <span class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm">88.5</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-300 text-lg">83.42</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Progress Bars untuk Lampiran 7 -->
+                <div class="grid md:grid-cols-2 gap-8 mt-12">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-purple-300 font-semibold">Siklus 1</span>
+                            <span class="text-yellow-400 font-bold">78.75%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 78.75%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-purple-300 font-semibold">Siklus 2</span>
+                            <span class="text-yellow-400 font-bold">83%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 83%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-purple-300 font-semibold">Siklus 3</span>
+                            <span class="text-yellow-400 font-bold">88.5%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 88.5%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-purple-300 font-semibold">Rata-rata Keseluruhan</span>
+                            <span class="text-yellow-400 font-bold">83.42%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 83.42%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lampiran 8: Penilaian Praktik Mengajar -->
+            <div class="tab-content" id="tab-lampiran-8">
+                <div class="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 p-8 rounded-xl border border-blue-500/20 overflow-x-auto">
+                    <h3 class="text-2xl font-bold text-blue-300 mb-6">
+                        <i class="fas fa-chalkboard-user mr-2"></i> Lampiran 8: Penilaian Praktik Mengajar
+                    </h3>
+                    
+                    <table class="w-full text-sm md:text-base">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Aspek Praktik Mengajar</th>
+                                <th class="text-center">Siklus 1</th>
+                                <th class="text-center">Siklus 2</th>
+                                <th class="text-center">Siklus 3</th>
+                                <th class="text-center">Rata-rata</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold text-blue-300">1. Penguasaan Materi & Kedalaman Kajian</td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">77</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">82</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">88</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-400">82.33</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold text-blue-300">2. Strategi & Metode Pembelajaran</td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">75</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">80</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">87</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-400">80.67</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold text-blue-300">3. Komunikasi & Interaksi dengan Siswa</td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">80</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">84</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">89</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-400">84.33</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold text-blue-300">4. Pengelolaan Kelas & Manajemen Waktu</td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">76</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">81</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">86</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-400">81</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold text-blue-300">5. Penggunaan Media & Teknologi Pembelajaran</td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">78</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">83</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">90</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-400">83.67</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold text-blue-300">6. Evaluasi & Umpan Balik Pembelajaran</td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">73</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">79</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-bold">85</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-400">79</td>
+                            </tr>
+                            <tr style="background: rgba(59, 130, 246, 0.1);">
+                                <td class="font-bold text-blue-300">RATA-RATA LAMPIRAN 8</td>
+                                <td class="text-center font-bold">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm">76.5</span>
+                                </td>
+                                <td class="text-center font-bold">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm">81.5</span>
+                                </td>
+                                <td class="text-center font-bold">
+                                    <span class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm">87.5</span>
+                                </td>
+                                <td class="text-center font-bold text-yellow-300 text-lg">81.83</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Progress Bars untuk Lampiran 8 -->
+                <div class="grid md:grid-cols-2 gap-8 mt-12">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-blue-300 font-semibold">Siklus 1</span>
+                            <span class="text-yellow-400 font-bold">76.5%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 76.5%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-blue-300 font-semibold">Siklus 2</span>
+                            <span class="text-yellow-400 font-bold">81.5%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 81.5%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-blue-300 font-semibold">Siklus 3</span>
+                            <span class="text-yellow-400 font-bold">87.5%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 87.5%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-blue-300 font-semibold">Rata-rata Keseluruhan</span>
+                            <span class="text-yellow-400 font-bold">81.83%</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 81.83%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Card -->
+                <div class="card-interactive p-8 rounded-xl mt-12">
+                    <h4 class="text-xl font-bold text-cyan-300 mb-4">
+                        <i class="fas fa-star mr-2"></i> Ringkasan Pencapaian
+                    </h4>
+                    <div class="grid md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-6 rounded-lg">
+                            <p class="text-3xl font-bold gradient-text mb-2">83.42</p>
+                            <p class="text-gray-300">Rata-rata<br>Perangkat Pembelajaran</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 p-6 rounded-lg">
+                            <p class="text-3xl font-bold text-cyan-400 mb-2">81.83</p>
+                            <p class="text-gray-300">Rata-rata<br>Praktik Mengajar</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-yellow-500/20 to-orange-500/20 p-6 rounded-lg">
+                            <p class="text-3xl font-bold text-yellow-400 mb-2">82.62</p>
+                            <p class="text-gray-300">Rata-rata<br>Keseluruhan (Guru Pamong)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 5: MODEL GURU YANG DITUJU ===== -->
+    <section id="guru" class="pt-32">
+        <div class="max-w-6xl mx-auto w-full">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 gradient-text">
+                <i class="fas fa-crown mr-3"></i> Model Guru yang Dituju
+            </h2>
+            <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+                Visi saya sebagai Guru Informatika profesional untuk menciptakan pembelajaran yang bermakna, inovatif, dan transformatif.
+            </p>
+
+            <!-- Misi Pendidik -->
+            <div class="card-interactive p-10 rounded-xl mb-12">
+                <h3 class="text-2xl font-bold text-center mb-8">
+                    <i class="fas fa-compass text-pink-400 mr-3"></i> Misi Masa Depan
+                </h3>
+                <div class="space-y-4 text-center max-w-3xl mx-auto">
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Menjadi pendidik Informatika yang visioner, adaptif, dan humanis untuk memberdayakan peserta didik mengembangkan kompetensi digital, kreativitas, dan karakter positif dalam menghadapi tantangan era transformasi digital dengan penuh tanggung jawab sosial dan etika profesional.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Kompetensi dan Karakter Guru -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Kompetensi Profesional -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-pink-300 mb-6">
+                        <i class="fas fa-certificate mr-2"></i> Kompetensi Profesional
+                    </h3>
+                    
+                    <div class="card-interactive p-6 rounded-lg hover:scale-105">
+                        <div class="flex gap-4">
+                            <div class="icon-box flex-shrink-0">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Penguasaan Materi Mendalam</h4>
+                                <p class="text-gray-400 text-sm">Menguasai konten Informatika terkini, metodologi pengajaran, dan praktik terbaik dalam industri teknologi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-interactive p-6 rounded-lg hover:scale-105">
+                        <div class="flex gap-4">
+                            <div class="icon-box flex-shrink-0">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Literasi Digital Tinggi</h4>
+                                <p class="text-gray-400 text-sm">Mahir menggunakan teknologi pembelajaran, tools programming, dan platform digital untuk edukasi inovatif.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-interactive p-6 rounded-lg hover:scale-105">
+                        <div class="flex gap-4">
+                            <div class="icon-box flex-shrink-0">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Pembelajaran Berkelanjutan</h4>
+                                <p class="text-gray-400 text-sm">Komitmen terhadap pengembangan profesional melalui sertifikasi, workshop, dan riset pendidikan.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-interactive p-6 rounded-lg hover:scale-105">
+                        <div class="flex gap-4">
+                            <div class="icon-box flex-shrink-0">
+                                <i class="fas fa-people-group"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Kolaborasi & Networking</h4>
+                                <p class="text-gray-400 text-sm">Membangun komunitas belajar profesional, berbagi best practices, dan berkolaborasi dengan stakeholder pendidikan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kompetensi Pedagogik & Karakter -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-purple-300 mb-6">
+                        <i class="fas fa-heart mr-2"></i> Pedagogik & Karakter
+                    </h3>
+
+                    <div class="card-interactive p-6 rounded-lg hover:scale-105">
+                        <div class="flex gap-4">
+                            <div class="icon-box flex-shrink-0">
+                                <i class="fas fa-wand-magic-sparkles"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Pembelajaran Student-Centered</h4>
+                                <p class="text-gray-400 text-sm">Merancang pembelajaran yang mengutamakan kebutuhan siswa, mendorong eksplorasi aktif, dan menghargai keberagaman.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-interactive p-6 rounded-lg hover:scale-105">
+                        <div class="flex gap-4">
+                            <div class="icon-box flex-shrink-0">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Kreativitas & Inovasi</h4>
+                                <p class="text-gray-400 text-sm">Menciptakan pengalaman belajar yang engaging, kreatif, dan relevan dengan kehidupan nyata siswa.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-interactive p-6 rounded-lg hover:scale-105">
+                        <div class="flex gap-4">
+                            <div class="icon-box flex-shrink-0">
+                                <i class="fas fa-hands-holding-child"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Empati & Kepedulian</h4>
+                                <p class="text-gray-400 text-sm">Memahami tantangan siswa, memberikan dukungan emosional, dan membangun hubungan positif yang saling percaya.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-interactive p-6 rounded-lg hover:scale-105">
+                        <div class="flex gap-4">
+                            <div class="icon-box flex-shrink-0">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Integritas & Etika</h4>
+                                <p class="text-gray-400 text-sm">Menjadi teladan dalam profesionalisme, kejujuran, dan tanggung jawab moral dalam mendidik generasi digital yang berintegritas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pilar Pengembangan Guru -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card-interactive p-8 rounded-xl text-center">
+                    <div class="icon-box mx-auto mb-4">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Inovasi & Adaptasi</h4>
+                    <p class="text-gray-400">Selalu update dengan perkembangan teknologi terbaru dan fleksibel menyesuaikan strategi mengajar untuk memaksimalkan hasil pembelajaran.</p>
+                </div>
+
+                <div class="card-interactive p-8 rounded-xl text-center">
+                    <div class="icon-box mx-auto mb-4">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Kolaborasi & Kemitraan</h4>
+                    <p class="text-gray-400">Bekerja sama dengan guru lain, orang tua, industri, dan komunitas untuk menciptakan ekosistem pembelajaran yang holistik.</p>
+                </div>
+
+                <div class="card-interactive p-8 rounded-xl text-center">
+                    <div class="icon-box mx-auto mb-4">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Keberlanjutan & Dampak</h4>
+                    <p class="text-gray-400">Menciptakan pembelajaran yang berkelanjutan, berdampak positif pada kesuksesan siswa, dan kontribusi nyata untuk masyarakat.</p>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-16">
+                <p class="text-lg text-purple-300 mb-8">
+                    <i class="fas fa-quote-left mr-2 text-pink-400"></i>
+                    "Guru bukan hanya penyampai ilmu, tetapi arsitek masa depan yang membentuk karakter, memberdayakan potensi, dan menginspirasi generasi untuk membuat perbedaan positif di dunia."
+                    <i class="fas fa-quote-right ml-2 text-pink-400"></i>
+                </p>
+                <button class="btn-gradient px-10 py-4 rounded-lg text-white font-bold text-lg hover:scale-105">
+                    <i class="fas fa-envelope mr-3"></i> Mari Berkolaborasi
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-black/50 backdrop-blur-md border-t border-purple-500/20 py-12 mt-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="text-lg font-bold text-purple-300 mb-4">
+                        <i class="fas fa-graduation-cap mr-2"></i> Universitas
+                    </h4>
+                    <p class="text-gray-400 text-sm">Universitas Pendidikan Ganesha<br>Buleleng, Bali, Indonesia</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-purple-300 mb-4">
+                        <i class="fas fa-link mr-2"></i> Quick Links
+                    </h4>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li><a href="#home" class="hover:text-pink-400 transition">Home</a></li>
+                        <li><a href="#profile" class="hover:text-pink-400 transition">Profil</a></li>
+                        <li><a href="#artefak" class="hover:text-pink-400 transition">Artefak</a></li>
+                        <li><a href="#guru" class="hover:text-pink-400 transition">Guru</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-purple-300 mb-4">
+                        <i class="fas fa-phone mr-2"></i> Kontak
+                    </h4>
+                    <p class="text-gray-400 text-sm">
+                        Email: erna.budiartini@student.undiksha.ac.id<br>
+                        <span class="text-xs">+62 812-xxx-xxxx</span>
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-purple-300 mb-4">
+                        <i class="fas fa-share-nodes mr-2"></i> Social Media
+                    </h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-purple-500/20 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2026 E-Portfolio Ni Luh Erna Budiartini | PPG Prajabatan Universitas Pendidikan Ganesha</p>
+                <p class="mt-2">Dengan Semangat untuk Pendidikan Digital yang Lebih Baik</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ===== PARTIKEL BINTANG =====
+        function createStars() {
+            const container = document.getElementById('star-container');
+            const starCount = 100;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(star);
+            }
+
+            // Create falling stars
+            for (let i = 0; i < 20; i++) {
+                const fallingStar = document.createElement('div');
+                fallingStar.className = 'star-falling';
+                fallingStar.style.left = Math.random() * 100 + '%';
+                fallingStar.style.animationDelay = Math.random() * 8 + 's';
+                container.appendChild(fallingStar);
+            }
+        }
+
+        // ===== SMOOTH SCROLL NAVBAR =====
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-nav') === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ===== TAB FUNCTIONALITY =====
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabName = btn.getAttribute('data-tab');
+
+                // Remove active class from all
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked
+                btn.classList.add('active');
+                document.getElementById('tab-' + tabName).classList.add('active');
+            });
+        });
+
+        // ===== PROGRESS BAR ANIMATION =====
+        const progressBars = document.querySelectorAll('.progress-bar');
+        
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transition = 'width 1s cubic-bezier(0.4, 0.0, 0.2, 1)';
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0';
+                    setTimeout(() => {
+                        entry.target.style.width = width;
+                    }, 100);
+                }
+            });
+        }, observerOptions);
+
+        progressBars.forEach(bar => progressObserver.observe(bar));
+
+        // ===== BUTTON INTERACTIVITY =====
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = event.clientX - rect.left - size / 2;
+                const y = event.clientY - rect.top - size / 2;
+
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+            });
+        });
+
+        // ===== INITIALIZE =====
+        createStars();
+
+        // ===== HOVER EFFECT UNTUK CARD =====
+        const cards = document.querySelectorAll('.card-interactive');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // ===== SCROLL REVEAL ANIMATION =====
+        const revealElements = document.querySelectorAll('.card-interactive, .icon-box, .progress-container');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            revealObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
